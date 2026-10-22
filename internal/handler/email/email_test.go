@@ -71,9 +71,9 @@ func TestPost(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			queue := &fakeQueue{err: tt.queueErr}
 			engine := gin.New()
-			engine.POST("/emails", NewHandler(queue).Post)
+			engine.POST("/email", NewHandler(queue).Post)
 
-			req := httptest.NewRequest(http.MethodPost, "/emails", bytes.NewBufferString(tt.body))
+			req := httptest.NewRequest(http.MethodPost, "/email", bytes.NewBufferString(tt.body))
 			req.Header.Set("Content-Type", "application/json")
 			rec := httptest.NewRecorder()
 			engine.ServeHTTP(rec, req)

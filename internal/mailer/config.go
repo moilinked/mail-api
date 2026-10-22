@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	providerFeishu     = "feishu"
+	providerMail       = "mail"
 	providerAliyun     = "aliyun"
 	encryptionSTARTTLS = "starttls"
 	encryptionSSL      = "ssl"
@@ -17,7 +17,7 @@ const (
 
 type fileConfig struct {
 	Provider string     `yaml:"provider"`
-	Feishu   smtpConfig `yaml:"feishu"`
+	Mail     smtpConfig `yaml:"mail"`
 	Aliyun   smtpConfig `yaml:"aliyun"`
 }
 
@@ -29,7 +29,7 @@ type smtpConfig struct {
 	Encryption string `yaml:"encryption"`
 }
 
-// LoadConfig 读取配置文件，并按 provider 选出飞书或阿里云 SMTP。
+// LoadConfig 读取配置文件，并按 provider 选出 mail 或 aliyun 的 SMTP。
 func LoadConfig(path string) (Config, error) {
 	raw, err := os.ReadFile(path)
 	if err != nil {
@@ -44,8 +44,8 @@ func LoadConfig(path string) (Config, error) {
 	provider := strings.ToLower(strings.TrimSpace(file.Provider))
 	var selected smtpConfig
 	switch provider {
-	case providerFeishu:
-		selected = file.Feishu
+	case providerMail:
+		selected = file.Mail
 	case providerAliyun:
 		selected = file.Aliyun
 	default:

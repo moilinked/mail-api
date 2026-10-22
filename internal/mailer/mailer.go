@@ -1,4 +1,4 @@
-// Package mailer 通过飞书 SMTP 发送水质报告邮件。
+// Package mailer 通过 SMTP 发送邮件。
 package mailer
 
 import (

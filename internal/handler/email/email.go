@@ -16,7 +16,7 @@ type Queuer interface {
 	Enqueue(ctx context.Context, to string) error
 }
 
-// Handler 处理 POST /emails。
+// Handler 处理 POST /email。
 type Handler struct {
 	queue Queuer
 }

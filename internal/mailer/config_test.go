@@ -17,8 +17,8 @@ func TestLoadConfigSelectsProvider(t *testing.T) {
 		wantUser string
 	}{
 		{
-			name:     "feishu",
-			body:     "provider: feishu\nfeishu:\n  host: smtp.feishu.cn\n  port: 587\n  username: info@waterdropfilter.com\n  password: secret\n  encryption: starttls\n",
+			name:     "mail",
+			body:     "provider: mail\nmail:\n  host: smtp.feishu.cn\n  port: 587\n  username: info@waterdropfilter.com\n  password: secret\n  encryption: starttls\n",
 			wantHost: "smtp.feishu.cn",
 			wantPort: 587,
 			wantEnc:  encryptionSTARTTLS,
@@ -64,16 +64,16 @@ func TestLoadConfigRequiresAliyunCredentials(t *testing.T) {
 	}
 }
 
-func TestLoadRepoConfigUsesFeishu(t *testing.T) {
+func TestLoadRepoConfigUsesMail(t *testing.T) {
 	cfg, err := LoadConfig(filepath.Join("..", "..", "config.yaml"))
 	if err != nil {
 		t.Fatalf("load: %v", err)
 	}
-	if cfg.Provider != providerFeishu || cfg.Host != "smtp.feishu.cn" || cfg.Port != 587 || cfg.Encryption != encryptionSTARTTLS {
+	if cfg.Provider != providerMail || cfg.Host != "smtp.feishu.cn" || cfg.Port != 587 || cfg.Encryption != encryptionSTARTTLS {
 		t.Fatalf("provider = %s host = %s port = %d encryption = %s", cfg.Provider, cfg.Host, cfg.Port, cfg.Encryption)
 	}
 	if cfg.Username != "info@waterdropfilter.com" || cfg.Password == "" {
-		t.Fatal("expected feishu credentials from config")
+		t.Fatal("expected mail credentials from config")
 	}
 }
 

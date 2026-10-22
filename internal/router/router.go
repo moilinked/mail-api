@@ -7,8 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Setup 把路由挂到 engine 上。sendEmail 处理 POST /emails。
+// Setup 把路由挂到 engine 上。sendEmail 处理 POST /email。
 func Setup(engine *gin.Engine, sendEmail gin.HandlerFunc) {
 	engine.GET("/health", health.Get)
-	engine.POST("/emails", sendEmail)
+	engine.POST("/email", sendEmail)
 }
